@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://oherdqlo7bow"]
+
+[ext_resource type="Script" uid="uid://bro8n5qr1vmou" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://dt3o8um6ghacc" path="res://JojoS2_OP.ogg" id="2_h2yge"]
+
+[node name="main" type="Node2D" unique_id=949771113]
+script = ExtResource("1_0xm2m")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1847943463]
+stream = ExtResource("2_h2yge")
+volume_db = -46.236
+autoplay = true
+
+[node name="Lanes" type="Node2D" parent="." unique_id=651592826]

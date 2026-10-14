@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://3dbp8hkllkfd"]
+
+[ext_resource type="Script" uid="uid://cwqrcqjkimyk2" path="res://ritm/hit_zone.gd" id="1_2rgcb"]
+
+[node name="HitZone" type="ColorRect" unique_id=1431118769]
+offset_right = 60.0
+offset_bottom = 120.0
+color = Color(1, 1, 1, 0.2509804)
+script = ExtResource("1_2rgcb")
+
+[node name="Label1" type="Label" parent="." unique_id=1683277685]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 60.0
+offset_bottom = 123.0
+theme_override_font_sizes/font_size = 20
+text = "D"

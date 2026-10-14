@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cyin24jir11f8"]
+
+[ext_resource type="Script" uid="uid://blnxwhsroxe1y" path="res://scenes/lenya_game_over.gd" id="1_3cvtl"]
+
+[node name="LenyaGameOver" type="Control" unique_id=630457910]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3cvtl")
+
+[node name="Panel" type="Panel" parent="." unique_id=1483939790]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -594.0
+offset_top = -343.0
+offset_right = 618.0
+offset_bottom = 365.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1236267974]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -55.5
+offset_right = 144.0
+offset_bottom = 55.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=413016686]
+layout_mode = 2
+text = "Еще раз"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1303558602]
+layout_mode = 2
+text = "Выйти
+"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_again_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_exit_pressed"]

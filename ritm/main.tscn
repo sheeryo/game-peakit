@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://oherdqlo7bow"]
+
+[ext_resource type="Script" uid="uid://bro8n5qr1vmou" path="res://ritm/main.gd" id="1_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://bv1ww5p5up8t3" path="res://assets/music/lenya_song.wav" id="2_4ab1q"]
+
+[node name="main" type="Node2D" unique_id=949771113]
+script = ExtResource("1_0xm2m")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1847943463]
+stream = ExtResource("2_4ab1q")
+volume_db = 7.796
+autoplay = true
+
+[node name="Lanes" type="Node2D" parent="." unique_id=651592826]
+
+[node name="HpBar" type="ColorRect" parent="." unique_id=1693798756]
+offset_right = 100.0
+offset_bottom = 10.0
+
+[node name="Line" type="ColorRect" parent="." unique_id=180559494]
+offset_top = 600.0
+offset_right = 1200.0
+offset_bottom = 620.0
+color = Color(1, 1, 1, 0.2509804)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1955425396]
+
+[node name="score" type="Label" parent="CanvasLayer" unique_id=1464259691]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
+text = "0"
+
+[node name="combo" type="Label" parent="CanvasLayer" unique_id=1143142608]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 83.0
+text = "0x"
+
+[node name="Hitzones" type="Node2D" parent="." unique_id=44979306]

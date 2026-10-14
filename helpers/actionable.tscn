@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://jq4emxtvg4v5"]
+
+[sub_resource type="GDScript" id="GDScript_jpheg"]
+resource_name = "actionable"
+script/source = "extends Area2D
+
+@export var dialogue_resourse: DialogueResource
+@export var dialogue_start: String = \"start\"
+var has_triggered: bool = false
+
+func action() -> void:
+	DialogueManager.show_example_dialogue_balloon(dialogue_resourse, dialogue_start)
+	
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group(\"Player\") and not has_triggered:
+		action()
+		has_triggered = true
+"
+
+[node name="Actionable" type="Area2D" unique_id=2005417934]
+collision_layer = 16
+script = SubResource("GDScript_jpheg")
