@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://cam3iytw1qi4q" path="res://scripts/character_body_2d.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://cke8n5hlfp6qp" path="res://assets/character/mcdown.png" id="2_sprite"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 21.0
+height = 92.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_finder"]
+radius = 34.0147
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_sprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Direction" type="Marker2D" parent="."]
+
+[node name="ActionableFinder" type="Area2D" parent="Direction"]
+position = Vector2(0, 53)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/ActionableFinder"]
+position = Vector2(34, -53)
+shape = SubResource("CircleShape2D_finder")

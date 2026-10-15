@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://oil81n0ywu8n"]
-
-[ext_resource type="Script" uid="uid://d3p26cn7b16ve" path="res://ritm/note.gd" id="1_doocs"]
-
-[node name="Note" type="ColorRect" unique_id=43800112]
-offset_right = 60.0
-offset_bottom = 20.0
-color = Color(1, 0.11372549, 1, 1)
-script = ExtResource("1_doocs")

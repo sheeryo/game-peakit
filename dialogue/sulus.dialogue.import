@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://djiuev7iso3py"
+path="res://.godot/imported/sulus.dialogue-2919a0f94c22f6e38323822822831865.tres"
+
+[deps]
+
+source_file="res://dialogue/sulus.dialogue"
+dest_files=["res://.godot/imported/sulus.dialogue-2919a0f94c22f6e38323822822831865.tres"]
+
+[params]
+
+defaults=true

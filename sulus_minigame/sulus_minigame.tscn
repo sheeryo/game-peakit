@@ -1,47 +1,12 @@
 [gd_scene format=3 uid="uid://bhru8geams6mo"]
 
-[ext_resource type="Script" uid="uid://ddirb4vc5tn5r" path="res://sulus_minigame/sulus_minigame.gd" id="1_swkfi"]
+[ext_resource type="Script" uid="uid://ddirb4vc5tn5r" path="res://sulus_minigame/sulus_minigame.gd" id="1_script"]
 
-[node name="SulusMinigame" type="Node2D" unique_id=1968962139]
-script = ExtResource("1_swkfi")
-
-[node name="QuestionLabel" type="Label" parent="." unique_id=1670495568]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+[node name="SulusMinigame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 385.0
-offset_top = 308.0
-offset_right = 776.0
-offset_bottom = 361.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1395640099]
-offset_left = 433.0
-offset_top = 433.0
-offset_right = 773.0
-offset_bottom = 480.0
-
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1088746998]
-layout_mode = 2
-text = "1"
-
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1347360808]
-layout_mode = 2
-text = "2"
-
-[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1024128556]
-layout_mode = 2
-text = "3"
-
-[node name="Button4" type="Button" parent="VBoxContainer" unique_id=1875317354]
-layout_mode = 2
-text = "4"
-
-[node name="FeedbackLabel" type="Label" parent="." unique_id=531670242]
-offset_left = 377.0
-offset_top = 559.0
-offset_right = 775.0
-offset_bottom = 601.0
+script = ExtResource("1_script")

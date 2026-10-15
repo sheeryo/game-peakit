@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://b61v7q4hfo5wi"
+path="res://.godot/imported/lenya.dialogue-541e92c7a5dbc1f73fea9e9f9e2dcfb7.tres"
+
+[deps]
+
+source_file="res://dialogue/lenya.dialogue"
+dest_files=["res://.godot/imported/lenya.dialogue-541e92c7a5dbc1f73fea9e9f9e2dcfb7.tres"]
+
+[params]
+
+defaults=true

@@ -1,207 +1,258 @@
-extends Node2D
+extends Control
 
-# Тут твоя карта нот: время (в секундах) и полоска
-const chart = [
-	{"time": 4.0000, "lane": 0, "key": false, "phrase": 0},
-	{"time": 4.5000, "lane": 1, "key": false, "phrase": 0},
-	{"time": 5.0000, "lane": 2, "key": false, "phrase": 0},
-	{"time": 5.5000, "lane": 1, "key": false, "phrase": 0},
-	{"time": 6.0000, "lane": 2, "key": false, "phrase": 0},
-	{"time": 6.5000, "lane": 1, "key": false, "phrase": 0},
-	{"time": 7.0000, "lane": 0, "key": true, "phrase": 0},
-	{"time": 8.0000, "lane": 1, "key": false, "phrase": 1},
-	{"time": 8.5000, "lane": 2, "key": false, "phrase": 1},
-	{"time": 9.0000, "lane": 1, "key": false, "phrase": 1},
-	{"time": 9.5000, "lane": 0, "key": false, "phrase": 1},
-	{"time": 10.0000, "lane": 1, "key": false, "phrase": 1},
-	{"time": 10.2500, "lane": 2, "key": false, "phrase": 1},
-	{"time": 10.5000, "lane": 3, "key": false, "phrase": 1},
-	{"time": 11.0000, "lane": 2, "key": true, "phrase": 1},
-	{"time": 12.0000, "lane": 0, "key": false, "phrase": 2},
-	{"time": 12.2500, "lane": 1, "key": false, "phrase": 2},
-	{"time": 12.5000, "lane": 2, "key": false, "phrase": 2},
-	{"time": 13.0000, "lane": 1, "key": false, "phrase": 2},
-	{"time": 13.2500, "lane": 0, "key": false, "phrase": 2},
-	{"time": 13.5000, "lane": 1, "key": false, "phrase": 2},
-	{"time": 14.0000, "lane": 0, "key": false, "phrase": 2},
-	{"time": 14.2500, "lane": 1, "key": false, "phrase": 2},
-	{"time": 14.5000, "lane": 0, "key": false, "phrase": 2},
-	{"time": 14.7500, "lane": 1, "key": false, "phrase": 2},
-	{"time": 15.0000, "lane": 0, "key": true, "phrase": 2},
-	{"time": 16.0000, "lane": 3, "key": false, "phrase": 3},
-	{"time": 16.2500, "lane": 2, "key": false, "phrase": 3},
-	{"time": 16.5000, "lane": 1, "key": false, "phrase": 3},
-	{"time": 16.7500, "lane": 0, "key": false, "phrase": 3},
-	{"time": 17.0000, "lane": 1, "key": false, "phrase": 3},
-	{"time": 17.5000, "lane": 3, "key": false, "phrase": 3},
-	{"time": 18.0000, "lane": 2, "key": false, "phrase": 3},
-	{"time": 18.2500, "lane": 1, "key": false, "phrase": 3},
-	{"time": 18.5000, "lane": 2, "key": false, "phrase": 3},
-	{"time": 18.7500, "lane": 3, "key": false, "phrase": 3},
-	{"time": 19.0000, "lane": 0, "key": true, "phrase": 3},
-	{"time": 20.0000, "lane": 2, "key": false, "phrase": 4},
-	{"time": 20.2500, "lane": 3, "key": false, "phrase": 4},
-	{"time": 20.5000, "lane": 1, "key": false, "phrase": 4},
-	{"time": 20.7500, "lane": 2, "key": false, "phrase": 4},
-	{"time": 21.0000, "lane": 3, "key": false, "phrase": 4},
-	{"time": 21.2500, "lane": 2, "key": false, "phrase": 4},
-	{"time": 21.5000, "lane": 1, "key": false, "phrase": 4},
-	{"time": 22.0000, "lane": 0, "key": false, "phrase": 4},
-	{"time": 22.2500, "lane": 2, "key": false, "phrase": 4},
-	{"time": 22.5000, "lane": 3, "key": false, "phrase": 4},
-	{"time": 22.7500, "lane": 2, "key": false, "phrase": 4},
-	{"time": 23.0000, "lane": 1, "key": true, "phrase": 4},
-	{"time": 24.0000, "lane": 0, "key": false, "phrase": 5},
-	{"time": 24.2500, "lane": 1, "key": false, "phrase": 5},
-	{"time": 24.5000, "lane": 2, "key": false, "phrase": 5},
-	{"time": 24.7500, "lane": 3, "key": false, "phrase": 5},
-	{"time": 25.0000, "lane": 2, "key": false, "phrase": 5},
-	{"time": 25.2500, "lane": 1, "key": false, "phrase": 5},
-	{"time": 25.5000, "lane": 0, "key": false, "phrase": 5},
-	{"time": 25.7500, "lane": 2, "key": false, "phrase": 5},
-	{"time": 26.0000, "lane": 1, "key": false, "phrase": 5},
-	{"time": 26.2500, "lane": 3, "key": false, "phrase": 5},
-	{"time": 26.5000, "lane": 1, "key": false, "phrase": 5},
-	{"time": 26.7500, "lane": 2, "key": false, "phrase": 5},
-	{"time": 27.0000, "lane": 3, "key": true, "phrase": 5},
-	{"time": 28.0000, "lane": 3, "key": false, "phrase": -1},
-	{"time": 28.0000, "lane": 0, "key": false, "phrase": -1},
-]
+const MASCOT := "lenya"
+const Chart := preload("res://ritm/lenya_chart.gd")
+const SONG := preload("res://assets/music/lenya_song.wav")
+const SFX_HIT := preload("res://assets/sfx/sfx_hit.wav")
+const SFX_MISS := preload("res://assets/sfx/sfx_miss.wav")
+const LENYA := preload("res://assets/character/lenya.png")
+const LANE_ACTIONS := ["lane_0", "lane_1", "lane_2", "lane_3"]
+const LANE_COLORS := [Brand.SALMON, Brand.BLUE, Brand.GREEN, Brand.RED]
+const KEY_COLOR := Brand.ORANGE
+const LANE_W := 44.0
+const HIGHWAY_X := 320.0 - LANE_W * 2
+const TOP_Y := 24.0
+const HIT_Y := 296.0
+const TRAVEL := 1.6
+const PERFECT := 0.07
+const GOOD := 0.13
+const MISS_AFTER := 0.16
+const ENERGY_START := 0.7
+const ENERGY_PERFECT := 0.05
+const ENERGY_GOOD := 0.04
+const ENERGY_MISS := -0.08
 
-var hitzone_scene = preload("res://ritm/hit_zone.tscn")
-var hitzones = []   # сюда сохраним ссылки на 4 полоски
-var score = 0
-var combo = 0
-var max_combo = 0
-const POINTS_PERFECT = 100
-const POINTS_GOOD = 50
-var note_scene = preload("res://ritm/Note.tscn")
-var Hp = 10
-var game_ended = false # Флаг, чтобы победа срабатывала только 1 раз
+enum State { PLAYING, RESULT }
+var state := State.PLAYING
+var notes: Array = []
+var next_judge := 0
+var song_time := -1.0
+var _clock := 0.0
+var energy := ENERGY_START
+var score := 0
+var combo := 0
+var max_combo := 0
+var perfect_count := 0
+var good_count := 0
+var miss_count := 0
+var won := false
+var letters: Array = []
+var lane_flash := [0.0, 0.0, 0.0, 0.0]
+var music: AudioStreamPlayer
+var sfx_hit: AudioStreamPlayer
+var sfx_miss: AudioStreamPlayer
+var canvas: Control
+var result_label: Label
 
-# Ноды для звуков
-@onready var hit_sound: AudioStreamPlayer = $HitSound
-@onready var miss_sound: AudioStreamPlayer = $MissSound
+func _ready() -> void:
+	for n in Chart.NOTES:
+		var note: Dictionary = n.duplicate()
+		note["judged"] = false
+		notes.append(note)
+	for p in Chart.PHRASES:
+		letters.append("")
+	build_ui()
+	music = make_player(SONG, -3.0, Settings.MUSIC_BUS)
+	sfx_hit = make_player(SFX_HIT, -8.0, Settings.SFX_BUS)
+	sfx_miss = make_player(SFX_MISS, -6.0, Settings.SFX_BUS)
+	music.play()
 
-func _ready():
-	for i in range(4):
-		var hz = hitzone_scene.instantiate()
-		hz.lane = i
-		hz.position.x = 440 + i * 100 - 40
-		hz.position.y = 600 - 60
-		$Hitzones.add_child(hz)
-		hitzones.append(hz)
+func make_player(stream: AudioStream, volume: float, bus: StringName) -> AudioStreamPlayer:
+	var player := AudioStreamPlayer.new()
+	player.bus = bus
+	player.stream = stream
+	player.volume_db = volume
+	add_child(player)
+	return player
 
-	# Запускаем музыку
-	$AudioStreamPlayer.play()
-	
-	# Спавним все ноты из карты
-	$HpBar.size.x = 120 * Hp
-	for n in chart:
-		var note = note_scene.instantiate()
-		note.hit_time = n.time
-		note.lane = n.lane
-		note.song = $AudioStreamPlayer
-		$Lanes.add_child(note)
-	update_ui()
+func current_song_time(delta: float) -> float:
+	_clock += delta
+	if music.playing:
+		var audio_time := music.get_playback_position() + AudioServer.get_time_since_last_mix() \
+			- AudioServer.get_output_latency()
+		if audio_time > 0.0:
+			_clock = audio_time
+	return maxf(song_time, _clock)
 
-func _process(delta):
-	if game_ended:
+func _process(delta: float) -> void:
+	if state == State.PLAYING:
+		song_time = current_song_time(delta)
+		judge_missed()
+		if song_time >= Chart.SONG_LENGTH - 0.3 and next_judge >= notes.size():
+			finish(true)
+	for i in 4:
+		lane_flash[i] = maxf(0.0, lane_flash[i] - delta * 5.0)
+	canvas.queue_redraw()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.echo:
 		return
+	match state:
+		State.PLAYING:
+			for lane in LANE_ACTIONS.size():
+				if event.is_action_pressed(LANE_ACTIONS[lane]):
+					press_lane(lane)
+					return
+		State.RESULT:
+			if event.is_action_pressed("enter"):
+				if won:
+					GameState.return_to_hub()
+				else:
+					get_tree().reload_current_scene()
+			elif event.is_action_pressed("ui_cancel") and not won:
+				get_viewport().set_input_as_handled()
+				GameState.return_to_hub()
 
-	# Обработка падения нот мимо
-	for note in $Lanes.get_children():
-		if note.position.y > 700:
-			note.queue_free()
-			print("Пропустил")
-			Health(-1)
+func press_lane(lane: int) -> void:
+	lane_flash[lane] = 1.0
+	var best := -1
+	var best_diff := GOOD
+	for i in range(next_judge, notes.size()):
+		var note: Dictionary = notes[i]
+		if note.time - song_time > GOOD:
+			break
+		if note.judged or note.lane != lane:
+			continue
+		var diff := absf(note.time - song_time)
+		if diff <= best_diff:
+			best = i
+			best_diff = diff
+	if best == -1:
+		return
+	judge(best, "perfect" if best_diff <= PERFECT else "good")
+
+func judge_missed() -> void:
+	for i in range(next_judge, notes.size()):
+		var note: Dictionary = notes[i]
+		if state != State.PLAYING or note.time + MISS_AFTER > song_time:
+			break
+		if not note.judged:
+			judge(i, "miss")
+	while next_judge < notes.size() and notes[next_judge].judged:
+		next_judge += 1
+
+func judge(i: int, result: String) -> void:
+	var note: Dictionary = notes[i]
+	note.judged = true
+	match result:
+		"perfect":
+			perfect_count += 1
+			combo += 1
+			score += 100 + combo * 2
+			energy += ENERGY_PERFECT
+		"good":
+			good_count += 1
+			combo += 1
+			score += 60 + combo
+			energy += ENERGY_GOOD
+		"miss":
+			miss_count += 1
 			combo = 0
-			
-			if miss_sound and miss_sound.stream:
-				miss_sound.play()
-				
-			update_ui()
-
-	# Проверка на победу: музыка не играет и в узле $Lanes больше не осталось нот
-	if not $AudioStreamPlayer.playing and $Lanes.get_child_count() == 0:
-		win_game()
-
-func win_game():
-	game_ended = true
-	GameState.complete_minigame("ritm")
-	GameState.add_stamp("lenya")
-	print("Победа! Возврат на карту мира.")
-	# Путь к вашей сцене world.tscn (проверьте, совпадает ли папка)
-	get_tree().change_scene_to_file("res://scenes/world.tscn")
-
-func _input(event):
-	if game_ended:
-		return
-		
-	if event is InputEventKey and event.pressed:
-		var lane = -1
-		if event.keycode == KEY_D: lane = 0
-		if event.keycode == KEY_F: lane = 1
-		if event.keycode == KEY_J: lane = 2
-		if event.keycode == KEY_K: lane = 3
-		if lane >= 0:
-			check_hit(lane)
-
-func check_hit(lane):
-	var now = $AudioStreamPlayer.get_playback_position()
-	var best_note = null
-	var best_diff = 999.0
-	if lane < hitzones.size():
-		hitzones[lane].flash()
-		
-	for note in $Lanes.get_children():
-		if note.lane == lane:
-			var diff = abs(note.hit_time - now)
-			if diff < best_diff:
-				best_diff = diff
-				best_note = note
-
-	if best_note and best_diff < 0.15:
-		best_note.queue_free()
-		print("Хорошо", best_diff)
-		Health(1)
-		
-		if hit_sound and hit_sound.stream:
-			hit_sound.play()
-			
-		var points = 0
-		if best_diff < 0.05:
-			points = POINTS_PERFECT
-		else:
-			points = POINTS_GOOD
-		
-		combo += 1
-		if combo > max_combo:
-			max_combo = combo
-		score += points
-		update_ui()
+			energy += ENERGY_MISS
+	max_combo = maxi(max_combo, combo)
+	energy = clampf(energy, 0.0, 1.0)
+	if result == "miss":
+		sfx_miss.play()
 	else:
-		combo = 0
-		print("Мимо")
-		Health(-1)
-		
-		if miss_sound and miss_sound.stream:
-			miss_sound.play()
-			
-		update_ui()
+		sfx_hit.play()
+	if note.key and note.phrase >= 0:
+		letters[note.phrase] = "miss" if result == "miss" else "hit"
+	if energy <= 0.0:
+		finish(false)
+	while next_judge < notes.size() and notes[next_judge].judged:
+		next_judge += 1
 
-func Health(dmg):
-	if game_ended:
+func finish(is_win: bool) -> void:
+	if state == State.RESULT:
 		return
-	Hp = Hp + dmg
-	$HpBar.size.x = 120 * Hp
-	if Hp < 1:
-		game_ended = true
-		print("You lose")
-		get_tree().change_scene_to_file("res://scenes/lenya_game_over.tscn")
-	
-func update_ui():
-	if has_node("CanvasLayer/score"):
-		$CanvasLayer/score.text = "Очки: " + str(score)
-	if has_node("CanvasLayer/combo"):
-		$CanvasLayer/combo.text = "x" + str(combo) if combo > 1 else ""
+	state = State.RESULT
+	won = is_win
+	music.stop()
+	Sfx.play("win" if won else "lose")
+	var lines: Array[String] = []
+	if won:
+		GameState.add_stamp(MASCOT)
+		lines.append("Леня: Ноты складываются в буквы… Р-А-К-Е-Т-А. Чувствуешь?")
+		lines.append("Очки: %d    Лучшее комбо: %d" % [score, max_combo])
+		lines.append("Улика: %s" % GameState.CLUES[MASCOT].title)
+	else:
+		lines.append("Сбился с ритма…")
+		lines.append("Леня: Ничего. Главное — чувствовать. Попробуем ещё раз?")
+	result_label.text = "\n".join(lines)
+	result_label.show()
+
+func lane_x(lane: int) -> float:
+	return HIGHWAY_X + lane * LANE_W
+
+func note_y(t: float) -> float:
+	return HIT_Y - (t - song_time) / TRAVEL * (HIT_Y - TOP_Y)
+
+func draw_scene() -> void:
+	var font := Brand.BODY_FONT
+	var beat := fmod(maxf(song_time, 0.0), 60.0 / Chart.BPM) / (60.0 / Chart.BPM)
+	var on_beat := beat < 0.15 and state == State.PLAYING
+
+	# Спрайт
+	var bounce := -3.0 if on_beat else 0.0
+	canvas.draw_texture_rect(LENYA, Rect2(42, 122 + bounce, 128, 128), false)
+
+	# Дорожки
+	for lane in 4:
+		var x := lane_x(lane)
+		var base: Color = LANE_COLORS[lane]
+		canvas.draw_rect(Rect2(x, TOP_Y, LANE_W, HIT_Y - TOP_Y + 20), Color(base, 0.08 + lane_flash[lane] * 0.25))
+		canvas.draw_line(Vector2(x, TOP_Y), Vector2(x, HIT_Y + 20), Color(1, 1, 1, 0.12))
+		var receptor := Rect2(x + 4, HIT_Y - 7, LANE_W - 8, 14)
+		canvas.draw_rect(receptor, Color(base, 0.35 + lane_flash[lane] * 0.6), false, 2.0)
+
+	# Линия попадания
+	canvas.draw_line(Vector2(HIGHWAY_X - 6, HIT_Y), Vector2(HIGHWAY_X + LANE_W * 4 + 6, HIT_Y),
+		Color(1, 1, 1, 0.9 if on_beat else 0.5), 2.0)
+
+	# Ноты (без линии-подсветки)
+	for i in range(next_judge, notes.size()):
+		var note: Dictionary = notes[i]
+		var y := note_y(note.time)
+		if y < TOP_Y - 16:
+			break
+		if note.judged:
+			continue
+		var x := lane_x(note.lane)
+		var color: Color = KEY_COLOR if note.key else LANE_COLORS[note.lane]
+		var rect := Rect2(x + 3, y - 9, LANE_W - 6, 18) if note.key else Rect2(x + 5, y - 6, LANE_W - 10, 12)
+		canvas.draw_rect(rect, color)
+		canvas.draw_rect(rect, Color.WHITE if note.key else Color(0.1, 0.07, 0.1), false, 1.0)
+
+	draw_panel(font)
+
+func draw_panel(font: Font) -> void:
+	var x := 440.0
+	canvas.draw_string(font, Vector2(x, 130), "Очки: %d" % score, HORIZONTAL_ALIGNMENT_LEFT, -1, 13)
+	canvas.draw_string(font, Vector2(x, 152), "Комбо: %d" % combo, HORIZONTAL_ALIGNMENT_LEFT, -1, 13,
+		KEY_COLOR if combo >= 10 else Color.WHITE)
+	canvas.draw_string(font, Vector2(x, 184), "Здоровье", HORIZONTAL_ALIGNMENT_LEFT, -1, 13)
+	var bar := Rect2(x, 192, 160, 10)
+	canvas.draw_rect(bar, Color(1, 1, 1, 0.1))
+	var fill_color := Color(0.4, 0.9, 0.5) if energy > 0.3 else Color(1.0, 0.4, 0.35)
+	canvas.draw_rect(Rect2(bar.position, Vector2(bar.size.x * energy, bar.size.y)), fill_color)
+	canvas.draw_rect(bar, Color(1, 1, 1, 0.4), false, 1.0)
+
+func build_ui() -> void:
+	var background := ColorRect.new()
+	background.color = Brand.BLUE.darkened(0.78)
+	background.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(background)
+	canvas = Control.new()
+	canvas.set_anchors_preset(Control.PRESET_FULL_RECT)
+	canvas.draw.connect(draw_scene)
+	add_child(canvas)
+	result_label = Label.new()
+	result_label.set_anchors_preset(Control.PRESET_FULL_RECT)
+	result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	result_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	result_label.add_theme_font_size_override("font_size", 13)
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(Brand.BROWN_DEEP, 0.92)
+	result_label.add_theme_stylebox_override("normal", style)
+	result_label.hide()
+	add_child(result_label)

@@ -1,15 +1,8 @@
 [gd_scene format=3 uid="uid://cxuyggswuob6m"]
 
 [ext_resource type="Texture2D" uid="uid://befvepd0mj627" path="res://assets/tiles/ground.png" id="1_i7141"]
-[ext_resource type="Script" uid="uid://cam3iytw1qi4q" path="res://scripts/character_body_2d.gd" id="1_k0juu"]
-[ext_resource type="Texture2D" uid="uid://7krphvdi8yo8" path="res://icon.svg" id="2_71j4m"]
-[ext_resource type="PackedScene" uid="uid://jq4emxtvg4v5" path="res://helpers/actionable.tscn" id="3_qfnet"]
-[ext_resource type="Resource" uid="uid://c00juwev7ja4w" path="res://dialogue/main.dialogue" id="4_i7141"]
-[ext_resource type="Texture2D" uid="uid://el16hri7ihsu" path="res://assets/mascots/it.png" id="5_7t5mc"]
 [ext_resource type="Script" uid="uid://drh7jis7i2bh5" path="res://scenes/area_2d.gd" id="5_71j4m"]
-[ext_resource type="Script" uid="uid://c437w1ptaww7b" path="res://scenes/moyto_scene.gd" id="6_7r4gi"]
 [ext_resource type="Resource" uid="uid://1cw7i80o8asf" path="res://dialogue/start.dialogue" id="6_qfnet"]
-[ext_resource type="Script" uid="uid://y5vu3diqg6vf" path="res://scenes/sulus_scene.gd" id="6_xo05s"]
 [ext_resource type="Texture2D" uid="uid://cia715vonmq4o" path="res://assets/props/main_stage.png" id="8_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://3qj2cskfa0hq" path="res://assets/props/spotlight.png" id="10_e3hyu"]
 [ext_resource type="Texture2D" uid="uid://dwxcrl74l8v18" path="res://assets/props/lamp.png" id="11_q5onr"]
@@ -17,33 +10,39 @@
 [ext_resource type="Texture2D" uid="uid://j4ofykfwfoih" path="res://assets/props/circus_sign.png" id="13_o8fc1"]
 [ext_resource type="Texture2D" uid="uid://bn3bhtccmxdiy" path="res://assets/props/balloons.png" id="14_o8fc1"]
 [ext_resource type="Script" uid="uid://br3obux8kb58s" path="res://scenes/hud.gd" id="15_xo05s"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_f3jgm"]
-radius = 62.008064
-
-[sub_resource type="GDScript" id="GDScript_f3jgm"]
-resource_name = "rythm"
-script/source = "extends Area2D
-
-@export_file(\"*.tscn\") var next_scene: String = \"res://ritm/main.tscn\" 
-var is_player_inside = false
-
-func _ready():
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
-
-func _on_body_entered(body):
-	if body.name == \"Player\":
-		is_player_inside = true
-
-func _on_body_exited(body):
-	if body.name == \"Player\":
-		is_player_inside = false
-
-func action():
-	if is_player_inside and Input.is_action_just_pressed(\"enter\"):
-		get_tree().change_scene_to_file(next_scene)
-"
+[ext_resource type="Texture2D" uid="uid://bxw3j123dwgpl" path="res://assets/props/tea_stall.png" id="23_8u370"]
+[ext_resource type="Texture2D" uid="uid://b24nrkje05i0s" path="res://assets/props/bench.png" id="24_rga7q"]
+[ext_resource type="Texture2D" uid="uid://djavtcv38x2l1" path="res://assets/props/gate_hoton.png" id="25_6oujy"]
+[ext_resource type="Texture2D" uid="uid://x8d6dh648bns" path="res://assets/props/lecture.png" id="26_hi6a0"]
+[ext_resource type="Texture2D" uid="uid://dx1c6g31dfi16" path="res://assets/props/bunting.png" id="27_eo1xk"]
+[ext_resource type="Texture2D" uid="uid://3vr4rjl80arp" path="res://assets/props/art_stall.png" id="28_18clu"]
+[ext_resource type="Texture2D" uid="uid://d2ce1pkb4mkio" path="res://assets/props/guest_rope.png" id="29_4wdv8"]
+[ext_resource type="Texture2D" uid="uid://cif4gpxle3wpa" path="res://assets/character/lenyasprite.png" id="29_rga7q"]
+[ext_resource type="Texture2D" uid="uid://dtvt8o1qrvgbo" path="res://assets/props/circus_pedestal.png" id="30_d46x8"]
+[ext_resource type="Texture2D" uid="uid://g1o8d8g6c8my" path="res://assets/props/disco_ball.png" id="31_3l05q"]
+[ext_resource type="Texture2D" uid="uid://cuceh6n5lyv6p" path="res://assets/character/moitosprite.png" id="31_6oujy"]
+[ext_resource type="Texture2D" uid="uid://dxowwolcydlhm" path="res://assets/props/vinyl_standee.png" id="32_x28ej"]
+[ext_resource type="Texture2D" uid="uid://se4umsko6piv" path="res://assets/props/jukebox.png" id="33_1jxku"]
+[ext_resource type="Texture2D" uid="uid://bayuocf1518e1" path="res://assets/character/sulussprite.png" id="33_hi6a0"]
+[ext_resource type="Texture2D" uid="uid://c8gpmuduvo1os" path="res://assets/props/star_sign.png" id="34_1dgkn"]
+[ext_resource type="Texture2D" uid="uid://bd6nu4byv7uru" path="res://assets/props/music_stage.png" id="35_e68xj"]
+[ext_resource type="Texture2D" uid="uid://or3ixcqvck81" path="res://assets/character/katyasprite.png" id="35_eo1xk"]
+[ext_resource type="Texture2D" uid="uid://cb3imanjnl2t" path="res://assets/props/astronaut_board.png" id="36_5hglh"]
+[ext_resource type="Texture2D" uid="uid://di2ah7eqilpj5" path="res://assets/character/manyasprite.png" id="36_18clu"]
+[ext_resource type="Texture2D" uid="uid://0e58gvdwfglr" path="res://assets/props/planet.png" id="37_qg546"]
+[ext_resource type="Texture2D" uid="uid://d06hn2yye3fs" path="res://assets/props/backstage_door.png" id="38_pf35h"]
+[ext_resource type="Texture2D" uid="uid://b1tlxa5ykdtg2" path="res://assets/props/runway.png" id="39_iexy4"]
+[ext_resource type="Texture2D" uid="uid://dyx047d7683s2" path="res://assets/props/crates_prizes.png" id="40_npbic"]
+[ext_resource type="Resource" uid="uid://nvgdj8q32s70" path="res://dialogue/katya.dialogue" id="d_katya"]
+[ext_resource type="Resource" uid="uid://b61v7q4hfo5wi" path="res://dialogue/lenya.dialogue" id="d_lenya"]
+[ext_resource type="Resource" uid="uid://dw3tjtxyq0fro" path="res://dialogue/manya.dialogue" id="d_manya"]
+[ext_resource type="Resource" uid="uid://chk0513sdt75q" path="res://dialogue/moyto.dialogue" id="d_moyto"]
+[ext_resource type="Resource" uid="uid://cv0pe5hiec6vs" path="res://dialogue/stage.dialogue" id="d_stage"]
+[ext_resource type="Resource" uid="uid://djiuev7iso3py" path="res://dialogue/sulus.dialogue" id="d_sulus"]
+[ext_resource type="Script" uid="uid://doybhvb2ray0f" path="res://scenes/talk_area.gd" id="mz_script"]
+[ext_resource type="PackedScene" path="res://scenes/notebook.tscn" id="notebook_scene"]
+[ext_resource type="PackedScene" path="res://helpers/player.tscn" id="player_scene"]
+[ext_resource type="Texture2D" uid="uid://c1y8t4fwm8hug" path="res://assets/props/rocket.png" id="rocket_tex"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 89.02247
@@ -54,12 +53,6 @@ radius = 66.189125
 [sub_resource type="CircleShape2D" id="CircleShape2D_sv35n"]
 radius = 64.00781
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k0juu"]
-radius = 64.03124
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k5x2g"]
-radius = 60.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mrxx"]
 size = Vector2(965, 375)
 
@@ -69,147 +62,456 @@ size = Vector2(2735.75, 81)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sv35n"]
 size = Vector2(67.5, 1447)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_stage"]
+radius = 90.0
+
 [node name="world" type="Node2D" unique_id=1883516530]
+y_sort_enabled = true
 position = Vector2(88, 11)
 
 [node name="ground" type="Sprite2D" parent="." unique_id=2054421545]
 z_index = -10
 texture_repeat = 2
-position = Vector2(406.3417, -9.5)
+position = Vector2(406, -9)
 scale = Vector2(2.5263717, 2.0582385)
 texture = ExtResource("1_i7141")
 region_enabled = true
 region_rect = Rect2(0, 0, 960, 704)
 
-[node name="testnpc" type="Sprite2D" parent="." unique_id=233624291]
-position = Vector2(-399, 235)
-texture = ExtResource("2_71j4m")
-
-[node name="Actionable" parent="testnpc" unique_id=2005417934 instance=ExtResource("3_qfnet")]
-dialogue_resourse = ExtResource("4_i7141")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="testnpc/Actionable" unique_id=1571169601]
-shape = SubResource("CircleShape2D_f3jgm")
-
 [node name="collisions" type="StaticBody2D" parent="." unique_id=1151166463]
 
+[node name="Props" type="Node2D" parent="." unique_id=1802523548]
+y_sort_enabled = true
+
+[node name="MainStage" type="Sprite2D" parent="Props" unique_id=614559597]
+y_sort_enabled = true
+position = Vector2(392, -294)
+scale = Vector2(1.7166666, 1.7166668)
+texture = ExtResource("8_4mrxx")
+
+[node name="Spotlight" type="Sprite2D" parent="Props" unique_id=1308131775]
+y_sort_enabled = true
+position = Vector2(250, -273.5)
+texture = ExtResource("10_e3hyu")
+
+[node name="Spotlight2" type="Sprite2D" parent="Props" unique_id=1364863806]
+y_sort_enabled = true
+position = Vector2(523, -273)
+texture = ExtResource("10_e3hyu")
+
+[node name="Lamp" type="Sprite2D" parent="Props" unique_id=1464613577]
+y_sort_enabled = true
+position = Vector2(615, -241)
+scale = Vector2(1.495, 1.495)
+texture = ExtResource("11_q5onr")
+
+[node name="Lamp2" type="Sprite2D" parent="Props" unique_id=279645011]
+y_sort_enabled = true
+position = Vector2(187, -241)
+scale = Vector2(1.495, 1.495)
+texture = ExtResource("11_q5onr")
+
+[node name="CircusTent" type="Sprite2D" parent="Props" unique_id=1053924267]
+y_sort_enabled = true
+position = Vector2(440, 344.00003)
+scale = Vector2(2.3300002, 2.3300002)
+texture = ExtResource("12_jhx03")
+
+[node name="CircusSign" type="Sprite2D" parent="Props" unique_id=17105733]
+y_sort_enabled = true
+position = Vector2(619, 467.99997)
+scale = Vector2(1.455, 1.455)
+texture = ExtResource("13_o8fc1")
+
+[node name="Balloons" type="Sprite2D" parent="Props" unique_id=1182762295]
+y_sort_enabled = true
+position = Vector2(582, 364.99997)
+scale = Vector2(1.705, 1.705)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons2" type="Sprite2D" parent="Props" unique_id=561402891]
+y_sort_enabled = true
+position = Vector2(303.812, 323.11447)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons3" type="Sprite2D" parent="Props" unique_id=303055181]
+y_sort_enabled = true
+position = Vector2(-368, -49)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons4" type="Sprite2D" parent="Props" unique_id=1611361898]
+y_sort_enabled = true
+position = Vector2(-472, 420)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons5" type="Sprite2D" parent="Props" unique_id=1398461678]
+y_sort_enabled = true
+position = Vector2(640, -574)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons6" type="Sprite2D" parent="Props" unique_id=476626169]
+y_sort_enabled = true
+position = Vector2(-64, -626)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons7" type="Sprite2D" parent="Props" unique_id=285188182]
+y_sort_enabled = true
+position = Vector2(1231, -578)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons8" type="Sprite2D" parent="Props" unique_id=1057557553]
+y_sort_enabled = true
+position = Vector2(1190, 150)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons9" type="Sprite2D" parent="Props" unique_id=1688564405]
+y_sort_enabled = true
+position = Vector2(1370, 554)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons10" type="Sprite2D" parent="Props" unique_id=308069779]
+y_sort_enabled = true
+position = Vector2(883, 425.99994)
+scale = Vector2(1.7067696, 1.7067696)
+texture = ExtResource("14_o8fc1")
+
+[node name="Balloons11" type="Sprite2D" parent="Props" unique_id=259498085]
+y_sort_enabled = true
+position = Vector2(-744, 575)
+scale = Vector2(1.81, 1.81)
+texture = ExtResource("14_o8fc1")
+
+[node name="TeaStall" type="Sprite2D" parent="Props" unique_id=193994686]
+y_sort_enabled = true
+position = Vector2(-575, 180)
+scale = Vector2(1.59, 1.59)
+texture = ExtResource("23_8u370")
+
+[node name="Bench" type="Sprite2D" parent="Props" unique_id=577662684]
+y_sort_enabled = true
+position = Vector2(-659, 286)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench3" type="Sprite2D" parent="Props" unique_id=198319792]
+y_sort_enabled = true
+position = Vector2(-395, -300)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench4" type="Sprite2D" parent="Props" unique_id=18305685]
+y_sort_enabled = true
+position = Vector2(-276, -300)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench2" type="Sprite2D" parent="Props" unique_id=412154242]
+y_sort_enabled = true
+position = Vector2(-528, 286)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("24_rga7q")
+
+[node name="GateHoton" type="Sprite2D" parent="Props" unique_id=779539757]
+y_sort_enabled = true
+position = Vector2(-205, -31)
+scale = Vector2(1.975, 1.7833333)
+texture = ExtResource("25_6oujy")
+
+[node name="Lecture" type="Sprite2D" parent="Props" unique_id=721575270]
+y_sort_enabled = true
+position = Vector2(-329, -464.99997)
+scale = Vector2(1.71, 1.71)
+texture = ExtResource("26_hi6a0")
+
+[node name="Bunting" type="Sprite2D" parent="Props" unique_id=1361699680]
+y_sort_enabled = true
+position = Vector2(-72.347824, -257)
+scale = Vector2(2.4347827, 2.4347825)
+texture = ExtResource("27_eo1xk")
+
+[node name="ArtStall" type="Sprite2D" parent="Props" unique_id=367313049]
+y_sort_enabled = true
+position = Vector2(0, 176.99997)
+scale = Vector2(2.2916667, 2.2916667)
+texture = ExtResource("28_18clu")
+
+[node name="GuestRope" type="Sprite2D" parent="Props" unique_id=679480821]
+y_sort_enabled = true
+position = Vector2(238, 618)
+scale = Vector2(1.7727273, 1.7727273)
+texture = ExtResource("29_4wdv8")
+
+[node name="GuestRope2" type="Sprite2D" parent="Props" unique_id=1307012548]
+y_sort_enabled = true
+position = Vector2(359, 618)
+scale = Vector2(1.7727273, 1.7727273)
+texture = ExtResource("29_4wdv8")
+
+[node name="GuestRope3" type="Sprite2D" parent="Props" unique_id=1649451266]
+y_sort_enabled = true
+position = Vector2(482.63635, 618)
+scale = Vector2(1.7727273, 1.7727273)
+texture = ExtResource("29_4wdv8")
+
+[node name="GuestRope4" type="Sprite2D" parent="Props" unique_id=790583914]
+y_sort_enabled = true
+position = Vector2(603.63635, 618)
+scale = Vector2(1.7727273, 1.7727273)
+texture = ExtResource("29_4wdv8")
+
+[node name="CircusPedestal" type="Sprite2D" parent="Props" unique_id=1947054695]
+y_sort_enabled = true
+position = Vector2(222, 437)
+scale = Vector2(1.34375, 1.34375)
+texture = ExtResource("30_d46x8")
+
+[node name="DiscoBall" type="Sprite2D" parent="Props" unique_id=1407441378]
+y_sort_enabled = true
+position = Vector2(1330, -233.00002)
+scale = Vector2(1.8846154, 1.8846155)
+texture = ExtResource("31_3l05q")
+
+[node name="Spotlight3" type="Sprite2D" parent="Props" unique_id=251041157]
+y_sort_enabled = true
+position = Vector2(1467, -458)
+scale = Vector2(1.7272726, 1.7272727)
+texture = ExtResource("10_e3hyu")
+
+[node name="VinylStandee" type="Sprite2D" parent="Props" unique_id=1066559642]
+y_sort_enabled = true
+position = Vector2(1527, -117)
+scale = Vector2(1.6590909, 1.659091)
+texture = ExtResource("32_x28ej")
+
+[node name="Bench5" type="Sprite2D" parent="Props" unique_id=1835157328]
+y_sort_enabled = true
+position = Vector2(1416, -0.5)
+scale = Vector2(1.65, 1.65)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench6" type="Sprite2D" parent="Props" unique_id=157119540]
+y_sort_enabled = true
+position = Vector2(1518, -0.5)
+scale = Vector2(1.65, 1.65)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench7" type="Sprite2D" parent="Props" unique_id=580109573]
+y_sort_enabled = true
+position = Vector2(1416, -391.5)
+scale = Vector2(1.65, 1.65)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench8" type="Sprite2D" parent="Props" unique_id=175829650]
+y_sort_enabled = true
+position = Vector2(1518, -391.5)
+scale = Vector2(1.65, 1.65)
+texture = ExtResource("24_rga7q")
+
+[node name="Jukebox" type="Sprite2D" parent="Props" unique_id=1475049387]
+y_sort_enabled = true
+position = Vector2(1526.0001, -307)
+scale = Vector2(1.71875, 1.71875)
+texture = ExtResource("33_1jxku")
+
+[node name="Bunting2" type="Sprite2D" parent="Props" unique_id=1484520056]
+y_sort_enabled = true
+position = Vector2(1147.6522, 362.5)
+scale = Vector2(1.9347819, 1.934782)
+texture = ExtResource("27_eo1xk")
+
+[node name="Bunting3" type="Sprite2D" parent="Props" unique_id=480658381]
+y_sort_enabled = true
+position = Vector2(1338, 362.5)
+scale = Vector2(1.9347819, 1.934782)
+texture = ExtResource("27_eo1xk")
+
+[node name="StarSign" type="Sprite2D" parent="Props" unique_id=902896113]
+y_sort_enabled = true
+position = Vector2(86, -579)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("34_1dgkn")
+
+[node name="StarSign2" type="Sprite2D" parent="Props" unique_id=2065928646]
+y_sort_enabled = true
+position = Vector2(589, -654.00006)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("34_1dgkn")
+
+[node name="StarSign3" type="Sprite2D" parent="Props" unique_id=1025076512]
+y_sort_enabled = true
+position = Vector2(413.00003, -480)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("34_1dgkn")
+
+[node name="MusicStage" type="Sprite2D" parent="Props" unique_id=1687182373]
+y_sort_enabled = true
+position = Vector2(292, -647)
+scale = Vector2(1.9519228, 1.9519228)
+texture = ExtResource("35_e68xj")
+
+[node name="AstronautBoard" type="Sprite2D" parent="Props" unique_id=1784587050]
+y_sort_enabled = true
+position = Vector2(495, -610)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("36_5hglh")
+
+[node name="Planet" type="Sprite2D" parent="Props" unique_id=908610664]
+y_sort_enabled = true
+position = Vector2(118, -671.99994)
+scale = Vector2(1.275, 1.275)
+texture = ExtResource("37_qg546")
+
+[node name="Planet2" type="Sprite2D" parent="Props" unique_id=1247837978]
+y_sort_enabled = true
+position = Vector2(404.00003, -672)
+scale = Vector2(1.275, 1.275)
+texture = ExtResource("37_qg546")
+
+[node name="Bench9" type="Sprite2D" parent="Props" unique_id=232610602]
+y_sort_enabled = true
+position = Vector2(231, -528)
+scale = Vector2(1.4999996, 1.4999996)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench10" type="Sprite2D" parent="Props" unique_id=1149903358]
+y_sort_enabled = true
+position = Vector2(336, -528)
+scale = Vector2(1.4999996, 1.4999996)
+texture = ExtResource("24_rga7q")
+
+[node name="BackstageDoor" type="Sprite2D" parent="Props" unique_id=619905009]
+y_sort_enabled = true
+position = Vector2(192, -649.00006)
+scale = Vector2(1.279412, 1.279412)
+texture = ExtResource("38_pf35h")
+
+[node name="StarSign4" type="Sprite2D" parent="Props" unique_id=1411675076]
+y_sort_enabled = true
+position = Vector2(114, -473.99997)
+scale = Vector2(1.2083334, 1.2083334)
+texture = ExtResource("34_1dgkn")
+
+[node name="Runway" type="Sprite2D" parent="Props" unique_id=1480293964]
+y_sort_enabled = true
+position = Vector2(1030.0001, -141.00002)
+scale = Vector2(1.8333334, 1.8333334)
+texture = ExtResource("39_iexy4")
+
+[node name="CratesPrizes" type="Sprite2D" parent="Props" unique_id=2003669016]
+y_sort_enabled = true
+position = Vector2(125, -290)
+scale = Vector2(1.625, 1.625)
+texture = ExtResource("40_npbic")
+
+[node name="Bench11" type="Sprite2D" parent="Props" unique_id=600939207]
+y_sort_enabled = true
+position = Vector2(325, -116.000015)
+scale = Vector2(1.95, 1.95)
+texture = ExtResource("24_rga7q")
+
+[node name="Bench12" type="Sprite2D" parent="Props" unique_id=1001726159]
+y_sort_enabled = true
+position = Vector2(443, -116.000015)
+scale = Vector2(1.95, 1.95)
+texture = ExtResource("24_rga7q")
+
+[node name="Rocket" type="Sprite2D" parent="Props" unique_id=321248329]
+y_sort_enabled = true
+position = Vector2(640, -640)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("rocket_tex")
+
 [node name="Lenya" type="Sprite2D" parent="." unique_id=1841628286]
-position = Vector2(1010, -286)
-texture = ExtResource("2_71j4m")
+position = Vector2(384, -595)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("29_rga7q")
 
 [node name="tothenextscene" type="Area2D" parent="Lenya" unique_id=1183782627]
+scale = Vector2(10, 10)
 collision_layer = 16
-script = SubResource("GDScript_f3jgm")
-next_scene = "uid://oherdqlo7bow"
+script = ExtResource("mz_script")
+dialogue_resource = ExtResource("d_lenya")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lenya/tothenextscene" unique_id=538595473]
 shape = SubResource("CircleShape2D_hqtel")
 
 [node name="Moyto" type="Sprite2D" parent="." unique_id=702896094]
 position = Vector2(0, 474)
-scale = Vector2(1.35, 1.35)
-texture = ExtResource("5_7t5mc")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("31_6oujy")
 
 [node name="Area2D" type="Area2D" parent="Moyto" unique_id=1095873484]
+scale = Vector2(10, 10)
 collision_layer = 16
-script = ExtResource("6_7r4gi")
-next_scene = "uid://dw5mbr1e6tur0"
+script = ExtResource("mz_script")
+dialogue_resource = ExtResource("d_moyto")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Moyto/Area2D" unique_id=184035110]
 shape = SubResource("CircleShape2D_paoxf")
 
 [node name="Sulus" type="Sprite2D" parent="." unique_id=1513873319]
-position = Vector2(-284, -459)
-texture = ExtResource("2_71j4m")
+position = Vector2(-333, -399)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("33_hi6a0")
 
 [node name="Area2D" type="Area2D" parent="Sulus" unique_id=556683763]
+scale = Vector2(10, 10)
 collision_layer = 16
-script = ExtResource("6_xo05s")
+script = ExtResource("mz_script")
+dialogue_resource = ExtResource("d_sulus")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sulus/Area2D" unique_id=742224742]
 shape = SubResource("CircleShape2D_sv35n")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=314333407 groups=["player"]]
+[node name="Katya" type="Sprite2D" parent="." unique_id=1516404298]
+position = Vector2(-73, 216)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("35_eo1xk")
+
+[node name="Area2D" type="Area2D" parent="Katya" unique_id=142603750]
+scale = Vector2(10, 10)
+collision_layer = 16
+script = ExtResource("mz_script")
+dialogue_resource = ExtResource("d_katya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Katya/Area2D" unique_id=485733385]
+shape = SubResource("CircleShape2D_sv35n")
+
+[node name="Manya" type="Sprite2D" parent="." unique_id=324457223]
+position = Vector2(958.99994, -98)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("36_18clu")
+
+[node name="Area2D" type="Area2D" parent="Manya" unique_id=505272855]
+scale = Vector2(10, 10)
+collision_layer = 16
+script = ExtResource("mz_script")
+dialogue_resource = ExtResource("d_manya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Manya/Area2D" unique_id=1963494437]
+shape = SubResource("CircleShape2D_sv35n")
+
+[node name="Player" parent="." unique_id=314333407 instance=ExtResource("player_scene")]
+y_sort_enabled = true
 position = Vector2(370, 0)
-script = ExtResource("1_k0juu")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1723280633]
-texture = ExtResource("2_71j4m")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=686410681]
-shape = SubResource("CircleShape2D_k0juu")
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=216193385]
-zoom = Vector2(1.435, 1.435)
-limit_left = -713
-limit_top = -716
-limit_right = 1690
-limit_bottom = 711
-
-[node name="Direction" type="Marker2D" parent="Player" unique_id=2128137089]
-
-[node name="ActionableFinder" type="Area2D" parent="Player/Direction" unique_id=1951889278]
-position = Vector2(0, 53)
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Direction/ActionableFinder" unique_id=1985615936]
-position = Vector2(64, -53)
-shape = SubResource("CircleShape2D_k5x2g")
+camera_zoom = Vector2(0.7, 0.7)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1591680501]
-collision_layer = 16
+collision_layer = 0
 script = ExtResource("5_71j4m")
 dialogue_resourse = ExtResource("6_qfnet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1053596070]
 position = Vector2(385, -29)
 shape = SubResource("RectangleShape2D_4mrxx")
-
-[node name="Props" type="Node2D" parent="." unique_id=1802523548]
-
-[node name="MainStage" type="Sprite2D" parent="Props" unique_id=614559597]
-position = Vector2(389, -306.5)
-scale = Vector2(2.4166667, 2.4166667)
-texture = ExtResource("8_4mrxx")
-
-[node name="Spotlight" type="Sprite2D" parent="Props" unique_id=1308131775]
-position = Vector2(250, -273.5)
-texture = ExtResource("10_e3hyu")
-
-[node name="Spotlight2" type="Sprite2D" parent="Props" unique_id=589900527]
-position = Vector2(528, -275.5)
-texture = ExtResource("10_e3hyu")
-
-[node name="Lamp" type="Sprite2D" parent="Props" unique_id=1464613577]
-position = Vector2(615, -241)
-scale = Vector2(1.495, 1.495)
-texture = ExtResource("11_q5onr")
-
-[node name="Lamp2" type="Sprite2D" parent="Props" unique_id=279645011]
-position = Vector2(187, -241)
-scale = Vector2(1.495, 1.495)
-texture = ExtResource("11_q5onr")
-
-[node name="CircusTent" type="Sprite2D" parent="Props" unique_id=1053924267]
-position = Vector2(446, 335)
-scale = Vector2(3.26, 3.26)
-texture = ExtResource("12_jhx03")
-
-[node name="CircusSign" type="Sprite2D" parent="Props" unique_id=17105733]
-position = Vector2(619, 467.99997)
-scale = Vector2(1.455, 1.455)
-texture = ExtResource("13_o8fc1")
-
-[node name="Balloons" type="Sprite2D" parent="Props" unique_id=1182762295]
-position = Vector2(539, 407.99997)
-scale = Vector2(1.705, 1.705)
-texture = ExtResource("14_o8fc1")
-
-[node name="Balloons2" type="Sprite2D" parent="Props" unique_id=561402891]
-position = Vector2(343, 405)
-scale = Vector2(1.952, 1.952)
-texture = ExtResource("14_o8fc1")
 
 [node name="borders" type="StaticBody2D" parent="." unique_id=783253276]
 
@@ -233,8 +535,11 @@ shape = SubResource("RectangleShape2D_sv35n")
 script = ExtResource("15_xo05s")
 
 [node name="StampsLabel" type="Label" parent="HubUI" unique_id=29784151]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 300.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 12
 
 [node name="Control" type="Control" parent="." unique_id=762871540]
 layout_mode = 3
@@ -246,5 +551,16 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="StageZone" type="Area2D" parent="." unique_id=1170735275]
+position = Vector2(392, -226)
+collision_layer = 16
+script = ExtResource("mz_script")
+dialogue_resource = ExtResource("d_stage")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageZone" unique_id=259343798]
+shape = SubResource("CircleShape2D_stage")
+
+[node name="Notebook" parent="." unique_id=1557427464 instance=ExtResource("notebook_scene")]
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

@@ -1,0 +1,24 @@
+import "res://dialogue/start.dialogue" as intro
+
+~ start
+if not GameState.has_met("manya")
+	=< intro/start
+	=> END
+if GameState.has_clue("katya") and not GameState.has_secret("manya_photo")
+	do GameState.add_secret_dialogue("manya_photo")
+	Маня: Ой, это фото с репетиции? Дай-ка посмотреть…
+	Маня: Рога и фартук… Так фартук только у Сулуса!
+	=> END
+if GameState.has_stamp("manya")
+	Маня: Ой, солнышко, как продвигается расследование?
+	Маня: Мой эскиз у тебя в блокноте. Ракету за сценой я обвела, как просили.
+	=> END
+Маня: А копыта у меня в краске, не смотри так! Это с арт-маркета, честное слово.
+Маня: Ой, беда, солнышко! Я рисовала схему праздника, а ветер разметал кусочки, и всё перепуталось!
+Маня: Поможешь собрать?
+- Помогу!
+	do GameState.request_minigame("manya")
+	=> END
+- Потом
+	Маня: Ой, хорошо, только возвращайся, солнышко!
+	=> END

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dw3tjtxyq0fro"
+path="res://.godot/imported/manya.dialogue-6424f43c63d9c325455a5d46598bd1fa.tres"
+
+[deps]
+
+source_file="res://dialogue/manya.dialogue"
+dest_files=["res://.godot/imported/manya.dialogue-6424f43c63d9c325455a5d46598bd1fa.tres"]
+
+[params]
+
+defaults=true

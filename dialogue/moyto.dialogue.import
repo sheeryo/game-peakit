@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://chk0513sdt75q"
+path="res://.godot/imported/moyto.dialogue-9365fbab3c3558ff0b036190e40adc36.tres"
+
+[deps]
+
+source_file="res://dialogue/moyto.dialogue"
+dest_files=["res://.godot/imported/moyto.dialogue-9365fbab3c3558ff0b036190e40adc36.tres"]
+
+[params]
+
+defaults=true

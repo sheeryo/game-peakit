@@ -1,30 +1,8 @@
 [gd_scene format=3 uid="uid://quej1ed5phkc"]
 
 [ext_resource type="Script" uid="uid://b2cvhhn0ruega" path="res://scenes/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Texture2D" uid="uid://cse65m0ltn53w" path="res://assets/logo_hoton.png" id="2_ekxnf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sv35n"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sv35n"]
-texture = ExtResource("2_ekxnf")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paoxf"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0dup"]
-
-[node name="MainMenu" type="Control" unique_id=553803221]
+[node name="MainMenu" type="Control" unique_id=989557337]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,68 +10,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
-
-[node name="Panel" type="Panel" parent="." unique_id=1066419574]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -609.0
-offset_top = -339.5
-offset_right = 609.0
-offset_bottom = 339.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sv35n")
-
-[node name="Panel2" type="Panel" parent="." unique_id=1368950327]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -107.5
-offset_top = 73.0
-offset_right = 107.5
-offset_bottom = 205.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_sv35n")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1463818729]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -77.25
-offset_right = 190.0
-offset_bottom = 77.25
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 8
-
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1565464691]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_paoxf")
-theme_override_styles/hover = SubResource("StyleBoxFlat_o0dup")
-text = "Начать игру"
-
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=209704397]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_paoxf")
-text = "Выйти
-"
-
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_exit_pressed"]

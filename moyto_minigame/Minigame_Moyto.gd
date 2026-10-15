@@ -1,161 +1,206 @@
 extends Control
 
-var current_round = 0
-var total_rounds = 5
-var best_time = 0.0
-var elapsed_time = 0.0
-var game_active = false
-var round_list = ["catch", "quiz", "timing", "catch", "quiz"]
+const MASCOT := "moyto"
+const MOYTO := preload("res://assets/character/moyto.png")
+const QUESTIONS_PER_ROUND := 5
+const CORRECT_TO_WIN := 3
+const TIME_PER_QUESTION := 10.0
+const FEEDBACK_TIME := 1.2
 
-@onready var score_label = $ScoreLabel
-@onready var best_label = $BestLabel
-@onready var time_label = $TimeLabel
-@onready var round_timer = $RoundTimer
-@onready var game_area = $GameArea
-@onready var result_screen = $ResultScreen
-@onready var result_label = $ResultScreen/ResultLabel
-@onready var restart_button = $ResultScreen/RestartButton
+const SELECTED_COLOR := Brand.SELECTED
+const NORMAL_COLOR := Brand.TEXT
 
-func _ready():
-	load_best_time()
-	update_ui()
-	result_screen.visible = false
-	restart_button.pressed.connect(_on_restart_pressed)
-	round_timer.timeout.connect(_on_round_timeout)
-	start_game()
+const QUESTIONS := [
+	{"q": "Чем детектив рассматривает мелкие улики?", "a": ["Лупой", "Зонтиком", "Барабаном"]},
+	{"q": "Куда детектив записывает улики?", "a": ["В блокнот", "В торт", "В ведро"]},
+	{"q": "Какой фестиваль Хотона был про ракеты и звёзды?", "a": ["«Космос»", "«Цирк»", "«Ретро»"]},
+	{"q": "Кто на цирковой арене носит красный нос?", "a": ["Клоун", "Космонавт", "Дирижёр"]},
+	{"q": "Что крутили на проигрывателе в ретро-времена?", "a": ["Пластинку", "Флешку", "Блин"]},
+	{"q": "Кто из маскотов Хотона — собачка?", "a": ["Мойто", "Маня", "Сулус"]},
+	{"q": "Кто из маскотов Хотона — коровка?", "a": ["Маня", "Катя", "Леня"]},
+	{"q": "Кто ведёт музыкальную программу фестиваля?", "a": ["Леня", "Мойто", "Катя"]},
+	{"q": "Что остаётся на снегу, если по нему пройти?", "a": ["Следы", "Ноты", "Печати"]},
+	{"q": "Что главное для детектива?", "a": ["Наблюдательность", "Громкий голос", "Длинный хвост"]},
+]
 
-func _process(delta):
-	if game_active:
-		elapsed_time += delta
-		update_time_label()
+enum State { QUESTION, FEEDBACK, RESULT }
 
-func start_game():
-	current_round = 0
-	elapsed_time = 0.0
-	game_active = true
-	update_ui()
-	start_round()
+var state := State.QUESTION
+var round_questions := []
+var index := 0
+var correct_count := 0
+var options: Array = []
+var correct_option := 0
+var selected := 0
+var time_left := TIME_PER_QUESTION
+var feedback_left := 0.0
+var won := false
 
-func start_round():
-	clear_game_area()
-	if current_round >= total_rounds:
-		end_game()
+var title_label: Label
+var question_label: Label
+var option_labels: Array[Label] = []
+var timer_bar: ProgressBar
+var info_label: Label
+
+
+func _ready() -> void:
+	build_ui()
+	var pool := QUESTIONS.duplicate()
+	pool.shuffle()
+	round_questions = pool.slice(0, QUESTIONS_PER_ROUND)
+	show_question()
+
+
+func _process(delta: float) -> void:
+	match state:
+		State.QUESTION:
+			time_left -= delta
+			timer_bar.value = time_left
+			if time_left <= 0.0:
+				answer(-1)
+		State.FEEDBACK:
+			feedback_left -= delta
+			if feedback_left <= 0.0:
+				next_question()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.echo:
 		return
-	var minigame = round_list[current_round]
-	match minigame:
-		"catch": start_catch()
-		"quiz": start_quiz()
-		"timing": start_timing()
-	round_timer.wait_time = 5.0
-	round_timer.start()
+	match state:
+		State.QUESTION:
+			if event.is_action_pressed("up"):
+				select((selected + options.size() - 1) % options.size())
+			elif event.is_action_pressed("down"):
+				select((selected + 1) % options.size())
+			elif event.is_action_pressed("enter"):
+				answer(selected)
+			elif event is InputEventKey and event.pressed:
+				var digit: int = event.physical_keycode - KEY_1
+				if digit >= 0 and digit < options.size():
+					answer(digit)
+		State.RESULT:
+			if event.is_action_pressed("enter"):
+				if won:
+					GameState.return_to_hub()
+				else:
+					get_tree().reload_current_scene()
+			elif event.is_action_pressed("ui_cancel") and not won:
+				get_viewport().set_input_as_handled()
+				GameState.return_to_hub()
 
-func start_catch():
-	var catch_button = Button.new()
-	catch_button.text = "!"
-	catch_button.custom_minimum_size = Vector2(80, 80)
-	catch_button.position = Vector2(
-		randf_range(50, game_area.size.x - 130),
-		randf_range(50, game_area.size.y - 130)
-	)
-	catch_button.pressed.connect(_on_catch_pressed)
-	game_area.add_child(catch_button)
 
-func _on_catch_pressed():
-	round_timer.stop()
-	complete_round()
+func show_question() -> void:
+	state = State.QUESTION
+	var question: Dictionary = round_questions[index]
+	options = question.a.duplicate()
+	options.shuffle()
+	correct_option = options.find(question.a[0])
+	title_label.text = "Мойто: Внимание, вопрос! %d из %d" % [index + 1, QUESTIONS_PER_ROUND]
+	question_label.text = question.q
+	for i in option_labels.size():
+		option_labels[i].text = "%d. %s" % [i + 1, options[i]]
+	time_left = TIME_PER_QUESTION
+	timer_bar.value = time_left
+	timer_bar.show()
+	info_label.text = "Верных ответов: %d" % correct_count
+	select(0)
 
-func start_quiz():
-	var items = [
-		{"name": "Шляпа", "emoji": "Ш", "correct": false},
-		{"name": "Лупа", "emoji": "Л", "correct": false},
-		{"name": "Блокнот", "emoji": "Б", "correct": false},
-		{"name": "Ракета", "emoji": "Р", "correct": true}
-	]
-	items.shuffle()
-	var start_x = 100
-	var start_y = 100
-	var spacing = 150
-	for i in range(items.size()):
-		var btn = Button.new()
-		btn.text = items[i]["emoji"] + "\n" + items[i]["name"]
-		btn.custom_minimum_size = Vector2(120, 120)
-		btn.position = Vector2(start_x + i * spacing, start_y)
-		btn.pressed.connect(_on_quiz_item_pressed.bind(items[i]["correct"]))
-		game_area.add_child(btn)
 
-func _on_quiz_item_pressed(is_correct: bool):
-	round_timer.stop()
-	if is_correct:
-		complete_round()
+func select(i: int) -> void:
+	if i != selected:
+		Sfx.play("ui_move")
+	selected = i
+	for j in option_labels.size():
+		option_labels[j].modulate = SELECTED_COLOR if j == selected else NORMAL_COLOR
+		option_labels[j].text = ("> " if j == selected else "   ") + "%d. %s" % [j + 1, options[j]]
+
+
+func answer(i: int) -> void:
+	if state != State.QUESTION:
+		return
+	state = State.FEEDBACK
+	feedback_left = FEEDBACK_TIME
+	timer_bar.hide()
+	Sfx.play("correct" if i == correct_option else "wrong")
+	if i == correct_option:
+		correct_count += 1
+		question_label.text = "Верно! Мойто радостно виляет хвостом."
+	elif i == -1:
+		question_label.text = "Время вышло! Правильно: %s" % options[correct_option]
 	else:
-		clear_game_area()
-		show_moyto_support()
-		await get_tree().create_timer(1.5).timeout
-		start_round()
+		question_label.text = "Не-а! Правильно: %s" % options[correct_option]
+	info_label.text = "Верных ответов: %d" % correct_count
 
-func start_timing():
-	var label = Label.new()
-	label.text = "Нажми вовремя (скоро)"
-	label.position = Vector2(200, 150)
-	game_area.add_child(label)
-	await get_tree().create_timer(2.0).timeout
-	complete_round()
 
-func _on_round_timeout():
-	clear_game_area()
-	show_moyto_support()
-	await get_tree().create_timer(1.5).timeout
-	start_round()
-
-func show_moyto_support():
-	var support_label = Label.new()
-	support_label.text = "Мойто: «Почти! Давай ещё разок!»"
-	support_label.position = Vector2(50, 10)
-	game_area.add_child(support_label)
-
-func complete_round():
-	current_round += 1
-	update_ui()
-	start_round()
-
-func update_ui():
-	score_label.text = "Пройдено: " + str(current_round) + "/" + str(total_rounds)
-	if best_time > 0:
-		best_label.text = "Лучшее: " + format_time(best_time)
+func next_question() -> void:
+	index += 1
+	if index >= round_questions.size():
+		finish()
 	else:
-		best_label.text = "Лучшее: —"
+		show_question()
 
-func update_time_label():
-	time_label.text = "Время: " + format_time(elapsed_time)
 
-func format_time(t):
-	var minutes = int(t / 60)
-	var seconds = int(t) % 60
-	return str(minutes) + ":" + str(seconds).pad_zeros(2)
+func finish() -> void:
+	state = State.RESULT
+	won = correct_count >= CORRECT_TO_WIN
+	Sfx.play("win" if won else "lose")
+	for label in option_labels:
+		label.text = ""
+	if won:
+		GameState.add_stamp(MASCOT)
+		title_label.text = "Мойто: Победа! Держи печать!"
+		question_label.text = "Верных ответов: %d из %d\nУлика: %s" % [
+			correct_count, QUESTIONS_PER_ROUND, GameState.CLUES[MASCOT].title]
+		info_label.text = ""
+	else:
+		title_label.text = "Мойто: Эх, почти!"
+		question_label.text = "Верных ответов: %d из %d. Нужно хотя бы %d." % [
+			correct_count, QUESTIONS_PER_ROUND, CORRECT_TO_WIN]
+		info_label.text = ""
 
-func clear_game_area():
-	for child in game_area.get_children():
-		child.queue_free()
 
-func end_game():
-	game_active = false
-	round_timer.stop()
-	clear_game_area()
-	if best_time == 0 or elapsed_time < best_time:
-		best_time = elapsed_time
-		save_best_time()
-	result_label.text = "Мойто доволен!\nТы справился!\n\nВремя: " + format_time(elapsed_time) + "\nЛучшее: " + format_time(best_time)
-	result_screen.visible = true
+func build_ui() -> void:
+	Brand.add_backdrop(self, MASCOT, Brand.RED.darkened(0.65))
 
-func _on_restart_pressed():
-	result_screen.visible = false
-	start_game()
+	var moyto := TextureRect.new()
+	moyto.texture = MOYTO
+	moyto.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	moyto.set_anchors_preset(Control.PRESET_CENTER)
+	moyto.offset_left = -300
+	moyto.offset_right = -172
+	moyto.offset_top = 20
+	moyto.offset_bottom = 148
+	add_child(moyto)
 
-func save_best_time():
-	var file = FileAccess.open("user://moyto_best.save", FileAccess.WRITE)
-	file.store_var(best_time)
+	var box := VBoxContainer.new()
+	box.set_anchors_preset(Control.PRESET_FULL_RECT)
+	box.offset_left = 150
+	box.offset_right = -110
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.add_theme_constant_override("separation", 10)
+	add_child(box)
 
-func load_best_time():
-	if FileAccess.file_exists("user://moyto_best.save"):
-		var file = FileAccess.open("user://moyto_best.save", FileAccess.READ)
-		best_time = file.get_var()
+	title_label = make_label(box, 16)
+	question_label = make_label(box, 14)
+	for i in 3:
+		var label := make_label(box, 13)
+		option_labels.append(label)
+
+	timer_bar = ProgressBar.new()
+	timer_bar.max_value = TIME_PER_QUESTION
+	timer_bar.show_percentage = false
+	timer_bar.custom_minimum_size = Vector2(200, 6)
+	timer_bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	box.add_child(timer_bar)
+
+	info_label = make_label(box, 11)
+
+
+func make_label(parent: Node, font_size: int) -> Label:
+	var label := Label.new()
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.add_theme_font_size_override("font_size", font_size)
+	parent.add_child(label)
+	return label

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://nvgdj8q32s70"
+path="res://.godot/imported/katya.dialogue-3e1b9daf0d5a4aa46c88c3f3418e08db.tres"
+
+[deps]
+
+source_file="res://dialogue/katya.dialogue"
+dest_files=["res://.godot/imported/katya.dialogue-3e1b9daf0d5a4aa46c88c3f3418e08db.tres"]
+
+[params]
+
+defaults=true

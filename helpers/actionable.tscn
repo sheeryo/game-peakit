@@ -9,7 +9,7 @@ script/source = "extends Area2D
 var has_triggered: bool = false
 
 func action() -> void:
-	DialogueManager.show_example_dialogue_balloon(dialogue_resourse, dialogue_start)
+	DialogueManager.show_dialogue_balloon(dialogue_resourse, dialogue_start)
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(\"Player\") and not has_triggered:

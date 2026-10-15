@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://jk5ry52ldhv5"
+path="res://.godot/imported/guests.dialogue-02edfaced406bbe77176e7ab13558676.tres"
+
+[deps]
+
+source_file="res://dialogue/guests.dialogue"
+dest_files=["res://.godot/imported/guests.dialogue-02edfaced406bbe77176e7ab13558676.tres"]
+
+[params]
+
+defaults=true
