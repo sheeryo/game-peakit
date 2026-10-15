@@ -1,0 +1,10 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="FontVariation" path="res://fonts/body.tres" id="1_body"]
+[ext_resource type="FontVariation" path="res://fonts/header.tres" id="2_header"]
+
+[resource]
+default_font = ExtResource("1_body")
+default_font_size = 12
+HeaderLabel/base_type = &"Label"
+HeaderLabel/fonts/font = ExtResource("2_header")

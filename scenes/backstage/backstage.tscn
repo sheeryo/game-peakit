@@ -1,0 +1,188 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/backstage/backstage.gd" id="r1"]
+[ext_resource type="Texture2D" path="res://art/tiles/backstage_floor.png" id="r2"]
+[ext_resource type="Script" path="res://dialogue/backstage.gd" id="r3"]
+[ext_resource type="PackedScene" path="res://scenes/hub/mascot_npc.tscn" id="r4"]
+[ext_resource type="PackedScene" path="res://scenes/hub/door.tscn" id="r5"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="r6"]
+[ext_resource type="Texture2D" path="res://art/props/stage_back.png" id="r7"]
+[ext_resource type="Texture2D" path="res://art/props/rocket.png" id="r8"]
+[ext_resource type="Texture2D" path="res://art/props/crates_prizes.png" id="r9"]
+[ext_resource type="Texture2D" path="res://art/props/spotlight.png" id="r10"]
+[ext_resource type="Texture2D" path="res://art/props/cable_coil.png" id="r11"]
+[ext_resource type="Texture2D" path="res://art/props/runway.png" id="r12"]
+[ext_resource type="Texture2D" path="res://art/props/backstage_door.png" id="r13"]
+[ext_resource type="Texture2D" path="res://art/props/bench.png" id="r14"]
+[ext_resource type="PackedScene" path="res://scenes/ui/notebook.tscn" id="r15"]
+
+[sub_resource type="RectangleShape2D" id="wall_h"]
+size = Vector2(704, 40)
+
+[sub_resource type="RectangleShape2D" id="wall_v"]
+size = Vector2(40, 362)
+
+[node name="backstage" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("r1")
+
+[node name="Ground" type="Sprite2D" parent="."]
+z_index = -10
+texture_repeat = 2
+position = Vector2(0, -16)
+texture = ExtResource("r2")
+region_enabled = true
+region_rect = Rect2(0, 0, 704, 416)
+
+[node name="BackWall" type="Polygon2D" parent="."]
+z_index = -9
+color = Color(0.12, 0.09, 0.1, 1)
+polygon = PackedVector2Array(-352, -224, 352, -224, 352, -150, -352, -150)
+
+[node name="RocketSpot" parent="." instance=ExtResource("r4")]
+position = Vector2(150, -70)
+mascot = "rocket_prop"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r3")
+dialogue_start = "rocket"
+prompt = "Enter — осмотреть ракету"
+
+[node name="CratesSpot" parent="." instance=ExtResource("r4")]
+position = Vector2(-190, -90)
+mascot = "crates_prop"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r3")
+dialogue_start = "crates"
+prompt = "Enter — осмотреть"
+
+[node name="SpotlightSpot" parent="." instance=ExtResource("r4")]
+position = Vector2(30, -110)
+mascot = "spotlight_prop"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r3")
+dialogue_start = "spotlight"
+prompt = "Enter — осмотреть"
+
+[node name="ExitDoor" parent="." instance=ExtResource("r5")]
+position = Vector2(-280, 20)
+target = 1
+label = "На фестиваль"
+closed_in_finale = true
+
+[node name="Player" parent="." instance=ExtResource("r6")]
+position = Vector2(-235, 20)
+camera_limits = Rect2i(-352, -224, 704, 416)
+
+[node name="Decor" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="StageBack" type="Sprite2D" parent="Decor"]
+position = Vector2(0, -150)
+texture = ExtResource("r7")
+centered = false
+offset = Vector2(-80, -64)
+
+[node name="Rocket" type="Sprite2D" parent="Decor"]
+position = Vector2(150, -60)
+texture = ExtResource("r8")
+centered = false
+offset = Vector2(-15, -66)
+
+[node name="Crates" type="Sprite2D" parent="Decor"]
+position = Vector2(-190, -80)
+texture = ExtResource("r9")
+centered = false
+offset = Vector2(-24, -40)
+
+[node name="Spotlight1" type="Sprite2D" parent="Decor"]
+position = Vector2(30, -100)
+texture = ExtResource("r10")
+centered = false
+offset = Vector2(-12, -44)
+
+[node name="Spotlight2" type="Sprite2D" parent="Decor"]
+position = Vector2(260, -40)
+texture = ExtResource("r10")
+centered = false
+offset = Vector2(-12, -44)
+
+[node name="Cable1" type="Sprite2D" parent="Decor"]
+position = Vector2(-80, 40)
+texture = ExtResource("r11")
+centered = false
+offset = Vector2(-14, -16)
+
+[node name="Cable2" type="Sprite2D" parent="Decor"]
+position = Vector2(220, 110)
+texture = ExtResource("r11")
+centered = false
+offset = Vector2(-14, -16)
+
+[node name="Rack" type="Sprite2D" parent="Decor"]
+position = Vector2(-60, -110)
+texture = ExtResource("r12")
+centered = false
+offset = Vector2(-32, -48)
+
+[node name="ExitCurtain" type="Sprite2D" parent="Decor"]
+position = Vector2(-280, 30)
+texture = ExtResource("r13")
+centered = false
+offset = Vector2(-17, -50)
+
+[node name="Rack2" type="Sprite2D" parent="Decor"]
+position = Vector2(-150, 150)
+texture = ExtResource("r12")
+centered = false
+offset = Vector2(-32, -48)
+
+[node name="Crates2" type="Sprite2D" parent="Decor"]
+position = Vector2(300, 160)
+texture = ExtResource("r9")
+centered = false
+offset = Vector2(-24, -40)
+
+[node name="Bench" type="Sprite2D" parent="Decor"]
+position = Vector2(60, 150)
+texture = ExtResource("r14")
+centered = false
+offset = Vector2(-20, -20)
+
+[node name="Mascots" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, -150)
+shape = SubResource("wall_h")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 172)
+shape = SubResource("wall_h")
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-332, 11)
+shape = SubResource("wall_v")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(332, 11)
+shape = SubResource("wall_v")
+
+[node name="Hint" type="CanvasLayer" parent="."]
+
+[node name="HintLabel" type="Label" parent="Hint"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 500.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 12
+
+[node name="Notebook" parent="." instance=ExtResource("r15")]
+

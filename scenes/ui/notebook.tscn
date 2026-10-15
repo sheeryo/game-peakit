@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bvstu3qbnwpj8"]
+
+[ext_resource type="Script" uid="uid://d1nw4lkc6mb5g" path="res://scenes/ui/notebook.gd" id="1_notebook"]
+
+[node name="Notebook" type="CanvasLayer" unique_id=874219361]
+script = ExtResource("1_notebook")

@@ -1,0 +1,419 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://art/tiles/ground.png" id="r1"]
+[ext_resource type="Script" path="res://dialogue/manya.gd" id="r2"]
+[ext_resource type="PackedScene" path="res://scenes/hub/mascot_npc.tscn" id="r3"]
+[ext_resource type="Script" path="res://dialogue/lenya.gd" id="r4"]
+[ext_resource type="Script" path="res://dialogue/katya.gd" id="r5"]
+[ext_resource type="Script" path="res://dialogue/moyto.gd" id="r6"]
+[ext_resource type="Script" path="res://dialogue/sulus.gd" id="r7"]
+[ext_resource type="Script" path="res://dialogue/stage.gd" id="r8"]
+[ext_resource type="Script" path="res://dialogue/guests.gd" id="r9"]
+[ext_resource type="PackedScene" path="res://scenes/hub/door.tscn" id="r10"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="r11"]
+[ext_resource type="Texture2D" path="res://art/props/gate_hoton.png" id="r12"]
+[ext_resource type="Texture2D" path="res://art/props/art_stall.png" id="r13"]
+[ext_resource type="Texture2D" path="res://art/props/tea_stall.png" id="r14"]
+[ext_resource type="Texture2D" path="res://art/props/bench.png" id="r15"]
+[ext_resource type="Texture2D" path="res://art/props/lamp.png" id="r16"]
+[ext_resource type="Texture2D" path="res://art/props/bunting.png" id="r17"]
+[ext_resource type="Texture2D" path="res://art/props/balloons.png" id="r18"]
+[ext_resource type="Texture2D" path="res://art/props/guest_rope.png" id="r19"]
+[ext_resource type="Texture2D" path="res://art/props/lecture.png" id="r20"]
+[ext_resource type="Texture2D" path="res://art/props/main_stage.png" id="r21"]
+[ext_resource type="Texture2D" path="res://art/props/music_stage.png" id="r22"]
+[ext_resource type="Texture2D" path="res://art/props/rocket.png" id="r23"]
+[ext_resource type="Texture2D" path="res://art/props/backstage_door.png" id="r24"]
+[ext_resource type="Texture2D" path="res://art/props/planet.png" id="r25"]
+[ext_resource type="Texture2D" path="res://art/props/star_sign.png" id="r26"]
+[ext_resource type="Texture2D" path="res://art/props/astronaut_board.png" id="r27"]
+[ext_resource type="Texture2D" path="res://art/props/runway.png" id="r28"]
+[ext_resource type="Texture2D" path="res://art/props/jukebox.png" id="r29"]
+[ext_resource type="Texture2D" path="res://art/props/vinyl_standee.png" id="r30"]
+[ext_resource type="Texture2D" path="res://art/props/disco_ball.png" id="r31"]
+[ext_resource type="Texture2D" path="res://art/props/circus_tent.png" id="r32"]
+[ext_resource type="Texture2D" path="res://art/props/circus_pedestal.png" id="r33"]
+[ext_resource type="Texture2D" path="res://art/props/circus_sign.png" id="r34"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="r35"]
+[ext_resource type="PackedScene" path="res://scenes/ui/notebook.tscn" id="r36"]
+
+[sub_resource type="RectangleShape2D" id="wall_h"]
+size = Vector2(960, 40)
+
+[sub_resource type="RectangleShape2D" id="wall_v"]
+size = Vector2(40, 704)
+
+[node name="world" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Ground" type="Sprite2D" parent="."]
+z_index = -10
+texture_repeat = 2
+position = Vector2(115, -15)
+texture = ExtResource("r1")
+region_enabled = true
+region_rect = Rect2(0, 0, 960, 704)
+
+[node name="SectorSpace" type="Polygon2D" parent="."]
+z_index = -9
+color = Color(0.16, 0.2, 0.45, 0.22)
+polygon = PackedVector2Array(30, -347, 480, -347, 480, -150, 30, -150)
+
+[node name="SectorCircus" type="Polygon2D" parent="."]
+z_index = -9
+color = Color(0.75, 0.15, 0.15, 0.14)
+polygon = PackedVector2Array(20, 110, 400, 110, 400, 297, 20, 297)
+
+[node name="SectorRetro" type="Polygon2D" parent="."]
+z_index = -9
+color = Color(0.75, 0.2, 0.65, 0.16)
+polygon = PackedVector2Array(470, -150, 555, -150, 555, 220, 470, 220)
+
+[node name="Manya" parent="." instance=ExtResource("r3")]
+position = Vector2(0, 0)
+mascot = "manya"
+display_name = "Маня"
+zone_name = "Арт-маркет"
+color = Color(0.894, 0.518, 0.392, 1)
+dialogue_script = ExtResource("r2")
+auto_start = true
+
+[node name="Lenya" parent="." instance=ExtResource("r3")]
+position = Vector2(200, -200)
+mascot = "lenya"
+display_name = "Леня"
+zone_name = "Музыка · Космос"
+color = Color(0.471, 0.69, 0.784, 1)
+dialogue_script = ExtResource("r4")
+
+[node name="Katya" parent="." instance=ExtResource("r3")]
+position = Vector2(420, 0)
+mascot = "katya"
+display_name = "Катя"
+zone_name = "Дефиле · Ретро"
+color = Color(0.455, 0.69, 0.408, 1)
+dialogue_script = ExtResource("r5")
+
+[node name="Moyto" parent="." instance=ExtResource("r3")]
+position = Vector2(200, 200)
+mascot = "moyto"
+display_name = "Мойто"
+zone_name = "Конкурсы · Цирк"
+color = Color(0.8, 0.361, 0.376, 1)
+dialogue_script = ExtResource("r6")
+
+[node name="Sulus" parent="." instance=ExtResource("r3")]
+position = Vector2(-200, -200)
+mascot = "sulus"
+display_name = "Сулус"
+zone_name = "Лекторий"
+color = Color(0.376, 0.251, 0.188, 1)
+dialogue_script = ExtResource("r7")
+
+[node name="MainStage" parent="." instance=ExtResource("r3")]
+position = Vector2(210, 0)
+mascot = "stage"
+display_name = ""
+zone_name = "Главная сцена"
+color = Color(0.894, 0.533, 0.141, 1)
+dialogue_script = ExtResource("r8")
+prompt = "Enter — осмотреть сцену"
+
+[node name="Guest0" parent="." instance=ExtResource("r3")]
+position = Vector2(60, -110)
+mascot = "guest_0"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r9")
+dialogue_start = "guest_0"
+
+[node name="Guest1" parent="." instance=ExtResource("r3")]
+position = Vector2(330, 100)
+mascot = "guest_1"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r9")
+dialogue_start = "guest_1"
+
+[node name="Guest2" parent="." instance=ExtResource("r3")]
+position = Vector2(-300, 40)
+mascot = "guest_2"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r9")
+dialogue_start = "guest_2"
+
+[node name="Guest3" parent="." instance=ExtResource("r3")]
+position = Vector2(110, 280)
+mascot = "guest_3"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r9")
+dialogue_start = "guest_3"
+
+[node name="Guest4" parent="." instance=ExtResource("r3")]
+position = Vector2(500, -200)
+mascot = "guest_4"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r9")
+dialogue_start = "guest_4"
+
+[node name="Guest5" parent="." instance=ExtResource("r3")]
+position = Vector2(-90, -270)
+mascot = "guest_5"
+display_name = ""
+zone_name = ""
+show_zone = false
+dialogue_script = ExtResource("r9")
+dialogue_start = "guest_5"
+
+[node name="BackstageDoor" parent="." instance=ExtResource("r10")]
+position = Vector2(130, -240)
+
+[node name="Player" parent="." instance=ExtResource("r11")]
+position = Vector2(80, 0)
+camera_limits = Rect2i(-365, -367, 960, 704)
+
+[node name="Decor" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Gate" type="Sprite2D" parent="Decor"]
+position = Vector2(-110, 40)
+texture = ExtResource("r12")
+centered = false
+offset = Vector2(-40, -60)
+
+[node name="ArtStall" type="Sprite2D" parent="Decor"]
+position = Vector2(-50, -10)
+texture = ExtResource("r13")
+centered = false
+offset = Vector2(-30, -48)
+
+[node name="TeaStall" type="Sprite2D" parent="Decor"]
+position = Vector2(-250, 110)
+texture = ExtResource("r14")
+centered = false
+offset = Vector2(-30, -50)
+
+[node name="Bench1" type="Sprite2D" parent="Decor"]
+position = Vector2(-270, 170)
+texture = ExtResource("r15")
+centered = false
+offset = Vector2(-20, -20)
+
+[node name="Bench2" type="Sprite2D" parent="Decor"]
+position = Vector2(-200, 170)
+texture = ExtResource("r15")
+centered = false
+offset = Vector2(-20, -20)
+
+[node name="Lamp1" type="Sprite2D" parent="Decor"]
+position = Vector2(-320, -40)
+texture = ExtResource("r16")
+centered = false
+offset = Vector2(-6, -52)
+
+[node name="Lamp2" type="Sprite2D" parent="Decor"]
+position = Vector2(-40, 110)
+texture = ExtResource("r16")
+centered = false
+offset = Vector2(-6, -52)
+
+[node name="Bunting1" type="Sprite2D" parent="Decor"]
+position = Vector2(-60, -100)
+texture = ExtResource("r17")
+centered = false
+offset = Vector2(-36, -46)
+
+[node name="Balloons1" type="Sprite2D" parent="Decor"]
+position = Vector2(-320, 260)
+texture = ExtResource("r18")
+centered = false
+offset = Vector2(-13, -48)
+
+[node name="Rope1" type="Sprite2D" parent="Decor"]
+position = Vector2(-150, 250)
+texture = ExtResource("r19")
+centered = false
+offset = Vector2(-28, -22)
+
+[node name="Lecture" type="Sprite2D" parent="Decor"]
+position = Vector2(-200, -226)
+texture = ExtResource("r20")
+centered = false
+offset = Vector2(-32, -50)
+
+[node name="LectureBench1" type="Sprite2D" parent="Decor"]
+position = Vector2(-250, -140)
+texture = ExtResource("r15")
+centered = false
+offset = Vector2(-20, -20)
+
+[node name="LectureBench2" type="Sprite2D" parent="Decor"]
+position = Vector2(-150, -140)
+texture = ExtResource("r15")
+centered = false
+offset = Vector2(-20, -20)
+
+[node name="MainStageProp" type="Sprite2D" parent="Decor"]
+position = Vector2(210, -18)
+texture = ExtResource("r21")
+centered = false
+offset = Vector2(-48, -60)
+
+[node name="Lamp3" type="Sprite2D" parent="Decor"]
+position = Vector2(120, 40)
+texture = ExtResource("r16")
+centered = false
+offset = Vector2(-6, -52)
+
+[node name="Lamp4" type="Sprite2D" parent="Decor"]
+position = Vector2(300, 40)
+texture = ExtResource("r16")
+centered = false
+offset = Vector2(-6, -52)
+
+[node name="MusicStage" type="Sprite2D" parent="Decor"]
+position = Vector2(200, -226)
+texture = ExtResource("r22")
+centered = false
+offset = Vector2(-36, -52)
+
+[node name="Rocket" type="Sprite2D" parent="Decor"]
+position = Vector2(262, -236)
+texture = ExtResource("r23")
+centered = false
+offset = Vector2(-15, -66)
+
+[node name="BackstageCurtain" type="Sprite2D" parent="Decor"]
+position = Vector2(130, -226)
+texture = ExtResource("r24")
+centered = false
+offset = Vector2(-17, -50)
+
+[node name="Planet1" type="Sprite2D" parent="Decor"]
+position = Vector2(70, -280)
+texture = ExtResource("r25")
+centered = false
+offset = Vector2(-20, -56)
+
+[node name="Planet2" type="Sprite2D" parent="Decor"]
+position = Vector2(440, -290)
+texture = ExtResource("r25")
+centered = false
+offset = Vector2(-20, -56)
+
+[node name="Star1" type="Sprite2D" parent="Decor"]
+position = Vector2(40, -200)
+texture = ExtResource("r26")
+centered = false
+offset = Vector2(-12, -44)
+
+[node name="Star2" type="Sprite2D" parent="Decor"]
+position = Vector2(330, -280)
+texture = ExtResource("r26")
+centered = false
+offset = Vector2(-12, -44)
+
+[node name="Star3" type="Sprite2D" parent="Decor"]
+position = Vector2(310, -170)
+texture = ExtResource("r26")
+centered = false
+offset = Vector2(-12, -44)
+
+[node name="Astronaut" type="Sprite2D" parent="Decor"]
+position = Vector2(390, -200)
+texture = ExtResource("r27")
+centered = false
+offset = Vector2(-22, -60)
+
+[node name="Runway" type="Sprite2D" parent="Decor"]
+position = Vector2(440, -22)
+texture = ExtResource("r28")
+centered = false
+offset = Vector2(-32, -48)
+
+[node name="Jukebox" type="Sprite2D" parent="Decor"]
+position = Vector2(540, -80)
+texture = ExtResource("r29")
+centered = false
+offset = Vector2(-16, -48)
+
+[node name="Vinyl" type="Sprite2D" parent="Decor"]
+position = Vector2(530, 100)
+texture = ExtResource("r30")
+centered = false
+offset = Vector2(-22, -54)
+
+[node name="DiscoBall" type="Sprite2D" parent="Decor"]
+position = Vector2(470, 170)
+texture = ExtResource("r31")
+centered = false
+offset = Vector2(-13, -56)
+
+[node name="CircusTent" type="Sprite2D" parent="Decor"]
+position = Vector2(200, 170)
+texture = ExtResource("r32")
+centered = false
+offset = Vector2(-34, -60)
+
+[node name="Pedestal" type="Sprite2D" parent="Decor"]
+position = Vector2(80, 220)
+texture = ExtResource("r33")
+centered = false
+offset = Vector2(-16, -40)
+
+[node name="CircusSign" type="Sprite2D" parent="Decor"]
+position = Vector2(320, 250)
+texture = ExtResource("r34")
+centered = false
+offset = Vector2(-24, -46)
+
+[node name="Balloons2" type="Sprite2D" parent="Decor"]
+position = Vector2(300, 170)
+texture = ExtResource("r18")
+centered = false
+offset = Vector2(-13, -48)
+
+[node name="Rope2" type="Sprite2D" parent="Decor"]
+position = Vector2(200, 300)
+texture = ExtResource("r19")
+centered = false
+offset = Vector2(-28, -22)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(115, -347)
+shape = SubResource("wall_h")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(115, 317)
+shape = SubResource("wall_h")
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-345, -15)
+shape = SubResource("wall_v")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(575, -15)
+shape = SubResource("wall_v")
+
+[node name="Hud" type="CanvasLayer" parent="."]
+script = ExtResource("r35")
+
+[node name="StampsLabel" type="Label" parent="Hud"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 300.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 12
+
+[node name="Notebook" parent="." instance=ExtResource("r36")]
+
